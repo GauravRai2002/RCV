@@ -28,14 +28,20 @@ else {
 // root.style.setProperty('--pos_y_final', Math.floor(Math.random() * (-250 - (-300) + 1) + (-300)) + 'px');
 
 //animation addition
-if (w > 900) {
-    e.setAttribute('style', 'display: block;position: relative;top:' + es.getPropertyValue('--pos_y_final') + ';left:' + es.getPropertyValue('--pos_x_final') + ';animation : anim0 1s ease-in-out; z-index:2;transform: scale(0.8);')
+if (w > 900 && w < 1300) {
+    e.setAttribute('style', 'display: block;position: relative;top:' + es.getPropertyValue('--pos_y_final') + ';left:' + es.getPropertyValue('--pos_x_final') + ';animation : anim0 1s ease-in-out; z-index:2;transform: scale(0.6);filter:brightness(1.05);')
+    e1.setAttribute('style', 'display: block ; position: absolute;top: calc(' + es.getPropertyValue('--pos_y_final') + ' + 50px);left:calc(50vw - 510px);  height: 1000px;  width: 1000px; animation : anim1 2s ease-in-out ;')
+    e2.setAttribute('style', 'display: block ; position: absolute;top: calc(' + es.getPropertyValue('--pos_y_final') + ' + 50px);left:calc(50vw - 510px);  height: 1000px;  width: 1000px; animation : anim2 2s ease-in-out ;')
+    e3.setAttribute('style', 'display: block ; position: absolute;top: calc(' + es.getPropertyValue('--pos_y_final') + ' + 50px);left:calc(50vw - 510px);  height: 1000px;  width: 1000px;animation : anim3 2s ease-in-out ;')
+}
+else if (w > 900) {
+    e.setAttribute('style', 'display: block;position: relative;top:' + es.getPropertyValue('--pos_y_final') + ';left:' + es.getPropertyValue('--pos_x_final') + ';animation : anim0 1s ease-in-out; z-index:2;transform: scale(0.8);filter:brightness(1.05);')
     e1.setAttribute('style', 'display: block ; position: absolute;top: calc(' + es.getPropertyValue('--pos_y_final') + ' + 50px);left:calc(50vw - 510px);  height: 1000px;  width: 1000px; animation : anim1 2s ease-in-out ;')
     e2.setAttribute('style', 'display: block ; position: absolute;top: calc(' + es.getPropertyValue('--pos_y_final') + ' + 50px);left:calc(50vw - 510px);  height: 1000px;  width: 1000px; animation : anim2 2s ease-in-out ;')
     e3.setAttribute('style', 'display: block ; position: absolute;top: calc(' + es.getPropertyValue('--pos_y_final') + ' + 50px);left:calc(50vw - 510px);  height: 1000px;  width: 1000px;animation : anim3 2s ease-in-out ;')
 }
 else {
-    e.setAttribute('style', 'display: block;position: relative;top:' + es.getPropertyValue('--pos_y_final') + ';left:' + es.getPropertyValue('--pos_x_final') + ';animation : anim0 1s ease-in-out; z-index:2;transform: scale(0.4);')
+    e.setAttribute('style', 'display: block;position: relative;top:' + es.getPropertyValue('--pos_y_final') + ';left:' + es.getPropertyValue('--pos_x_final') + ';animation : anim0 1s ease-in-out; z-index:2;transform: scale(0.4);filter:brightness(1.05);')
     e1.setAttribute('style', 'display: block ; position: absolute;top:' + es.getPropertyValue('--pos_y_final') + ';left:-230px;  height: 1000px;  width: 1000px; animation : anim1 2s ease-in-out ;')
     e2.setAttribute('style', 'display: block ; position: absolute;top:' + es.getPropertyValue('--pos_y_final') + ';left:-230px;  height: 1000px;  width: 1000px; animation : anim2 2s ease-in-out ;')
     e3.setAttribute('style', 'display: block ; position: absolute;top:' + es.getPropertyValue('--pos_y_final') + ';left:-230px;  height: 1000px;  width: 1000px;animation : anim3 2s ease-in-out ;')
@@ -745,7 +751,7 @@ const footer = new IntersectionObserver(footer => {
     else {
         document.getElementById('arr12').style.display = 'none'
     }
-}
+},
 )
 
 footer.observe(document.getElementById('arr11'));
@@ -754,20 +760,24 @@ footer.observe(document.getElementById('arr11'));
 
 
 
-
+let ar = 0;
 const footer12 = new IntersectionObserver(footer => {
 
     //    console.log(entries)
     if (footer[0].isIntersecting) {
-        document.getElementById('arr12').style.zIndex = '1'
+        document.getElementById('arr12').style.zIndex = '0'
+        if (ar == 0) {
+            document.getElementById('arr12').style.zIndex = '-1'
+            ar++
+        }
     }
     else {
         document.getElementById('arr12').style.zIndex = '-1'
     }
 },
-{
-    threshold: 0.9
-}
+    {
+        threshold: 1
+    }
 )
 
 footer12.observe(document.getElementById('arr12'));
@@ -856,20 +866,20 @@ function populate(arr, count, text, ids, dec) {
 
     const ImgArea = document.getElementById('photosarea');
     ImgArea.innerHTML = '';
-    let a=1;
+    let a = 1;
     arr.forEach(item => {
         const div = document.createElement('div');
         div.classList.add('imgdiv');
-        div.setAttribute('data-aos',"fade-up");
-        div.setAttribute('data-aos-duration',a*300);
+        div.setAttribute('data-aos', "fade-up");
+        div.setAttribute('data-aos-duration', a * 300);
         const img = document.createElement('img');
-        if(a==3){
-            a=1;   
+        if (a == 3) {
+            a = 1;
         }
-        else{
+        else {
             a++;
         }
-        
+
         // console.log(item)
         img.setAttribute('src', './img/work/page1/' + item + '.png')
         ImgArea.appendChild(div);
@@ -890,57 +900,76 @@ var num = 0;
 
 function left() {
 
-    const testimonials = ["    I Was Most Appreciative Of Their Ability To Provide Us With Designers For Specific Needs.Raw                        Cavas   Studio Was Transparent About Deliverables And Any Challenges The Team Was Facing.They erfectly                        Met                        My Expectations — Working With Them Felt Like An Extension Of My In - House Team.    ",   
+    const testimonials = [ "After an extensive search we settled on Raw Canvas. We couldn’t be happier with the results. We have no reservations about using them again.",
+        "I Was Most Appreciative Of Their Ability To Provide Us With Designers For Specific Needs. Raw Cavas Studio Was Transparent About Deliverables And Any Challenges The Team Was Facing. They Perfectly Met My Expectations — Working With Them Felt Like An Extension Of My In-House Team.",
 
-"   I Gaurav Rai kjsdhfjkhdskfjdjfhjkfhjdk Was Most Appreciative Of Their Ability To Provide Us With Designers For Specific Needs.Raw                        Cavas   Studio Was Transparent About Deliverables And Any Challenges The Team Was Facing.They erfectly                        Met                        My Expectations — Working With Them Felt Like An Extension Of My In - House Team.    "]
+        " Raw Canvas team are just amazing. We have had some personal websites and dashboards. The team always delivered on time. The best quality with endless iterations. Good Job! ", "After an extensive search we settled on Raw Canvas. We couldn’t be happier with the results. We have no reservations about using them again."
+   ]
+
+    const name1 = ['Pranav Sharma','Södra Jumkils Fiberförening', 'Steffen Konrath']
+    const post = ['Founding Partner -</span> Woodstock VC Fund','CEO of</span> Glance Tech Inc, Sweden', 'CEO & Founder of</span> Evai-Intelligence']
 
 
     var test1 = document.getElementById('test-1')
+    var test11 = document.getElementById('arr6_1_p')
+    var test12 = document.getElementById('arr6_1_p1')
     test1.style.opacity = 0;
-    setTimeout(() => {
-        if(num==0){
-            num=testimonials.length;
+    setTimeout(() => {  
+        if (num == 0) {
+            num = testimonials.length-1;
         }
         num--;
         test1.innerHTML = testimonials[num]
+        test11.innerHTML = name1[num]
+        test12.innerHTML = post[num]
         test1.style.opacity = 1;
     }, 500);
-    var test11 = document.getElementById('arr6_1_p')
     test11.style.opacity = 0;
     setTimeout(() => {
         test11.style.opacity = 1;
     }, 500);
-    var test12 = document.getElementById('arr6_1_p1')
     test12.style.opacity = 0;
     setTimeout(() => {
         test12.style.opacity = 1;
     }, 500);
 
 }
-
+var s=0;
 function right() {
 
-    const testimonials = ["    I Was Most Appreciative Of Their Ability To Provide Us With Designers For Specific Needs.Raw                        Cavas   Studio Was Transparent About Deliverables And Any Challenges The Team Was Facing.They erfectly                        Met                        My Expectations — Working With Them Felt Like An Extension Of My In - House Team.    ",   
+    const testimonials = ["I Was Most Appreciative Of Their Ability To Provide Us With Designers For Specific Needs. Raw Cavas Studio Was Transparent About Deliverables And Any Challenges The Team Was Facing. They Perfectly Met My Expectations — Working With Them Felt Like An Extension Of My In-House Team.",
 
-"   I Gaurav Rai kjsdhfjkhdskfjdjfhjkfhjdk Was Most Appreciative Of Their Ability To Provide Us With Designers For Specific Needs.Raw                        Cavas   Studio Was Transparent About Deliverables And Any Challenges The Team Was Facing.They erfectly                        Met                        My Expectations — Working With Them Felt Like An Extension Of My In - House Team.    "]
+    " Raw Canvas team are just amazing. We have had some personal websites and dashboards. The team always delivered on time. The best quality with endless iterations. Good Job! ", "After an extensive search we settled on Raw Canvas. We couldn’t be happier with the results. We have no reservations about using them again.",
+"After an extensive search we settled on Raw Canvas. We couldn’t be happier with the results. We have no reservations about using them again."]
+const name1 = ['Södra Jumkils Fiberförening', 'Steffen Konrath','Pranav Sharma']
+const post = ['CEO of</span> Glance Tech Inc, Sweden', 'CEO & Founder of</span> Evai-Intelligence','Founding Partner -</span> Woodstock VC Fund']
 
 
     var test1 = document.getElementById('test-1')
+    var test11 = document.getElementById('arr6_1_p')
+    var test12 = document.getElementById('arr6_1_p1')
     test1.style.opacity = 0;
+   
     setTimeout(() => {
-        if(num==testimonials.length-1){
+        if (num == testimonials.length - 2 ) {
+         
+            num = -1;
+           
+        }
+        if(num==0 && s==0){
             num=-1;
+            s++;
         }
         num++;
         test1.innerHTML = testimonials[num]
+        test11.innerHTML = name1[num]
+        test12.innerHTML = post[num]
         test1.style.opacity = 1;
     }, 500);
-    var test11 = document.getElementById('arr6_1_p')
     test11.style.opacity = 0;
     setTimeout(() => {
         test11.style.opacity = 1;
     }, 500);
-    var test12 = document.getElementById('arr6_1_p1')
     test12.style.opacity = 0;
     setTimeout(() => {
         test12.style.opacity = 1;
@@ -953,7 +982,7 @@ function right() {
 //     console.log(window.innerHeight )
 // }
 // setInterval(() => {
-    
+
 //     console1()
 // }, 1000);
 
@@ -964,31 +993,31 @@ function myFunction() {
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     var scrolled = (winScroll / height) * 100;
-    var bottom = scrolled-95.74
+    var bottom = scrolled - 95.74
     // var bottom = scrolled-90.74
 
-    if(bottom>=0){
-        document.getElementById('arr12').style.transform = 'translateY('+(60-(bottom*14.1))+'%)';
-        
+    if (bottom >= 0) {
+        document.getElementById('arr12').style.transform = 'translateY(' + (60 - (bottom * 14.1)) + '%)';
+
     }
     console.log(bottom)
 }
 
-window.onscroll = function() {myFunction()};
+window.onscroll = function () { myFunction() };
 
 
-function fullWidth(a){
-    if(a===1)
-    document.getElementById('email-bottm-2').style.width="100%";
-    else if(a===2)
-    document.getElementById('email-bottm-22').style.width="10%";
-    else if(a===3)
-    document.getElementById('email-bottm-22').style.width="100%";
+function fullWidth(a) {
+    if (a === 1)
+        document.getElementById('email-bottm-2').style.width = "100%";
+    else if (a === 2)
+        document.getElementById('email-bottm-22').style.width = "10%";
+    else if (a === 3)
+        document.getElementById('email-bottm-22').style.width = "100%";
     else
-    document.getElementById('email-bottm-2').style.width="10%";
+        document.getElementById('email-bottm-2').style.width = "10%";
 }
 
-function scrolltop(){
+function scrolltop() {
     // window.location.reload();
-    document.getElementByClassName('scroll-content')[0].style.transform='translate3d(0px, 0px, 0px);';
+    document.getElementByClassName('scroll-content')[0].style.transform = 'translate3d(0px, 0px, 0px);';
 }
